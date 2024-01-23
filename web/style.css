@@ -1,0 +1,28 @@
+html,body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+#menu {
+    height: 48px;
+}
+
+#game {
+    width: 100%;
+    height: calc(100% - 48px);
+}
+
+.game-grid{
+    display: grid;
+    width: 100%;
+    height: 100%;
+}
+
+.game-grid > form {
+    border: 1px solid black;
+}
+.game-grid > form.black {
+    background-color: midnightblue;
+}

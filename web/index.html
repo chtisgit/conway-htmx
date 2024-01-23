@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Game of Life</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="stylesheet" href="style.css">
+        <script src="htmx.min.js" defer></script>
+        <script src="sse.js" defer></script>
+    </head>
+
+    <body>
+        
+        <div id="menu">
+            <b>Game of Life</b>
+            <button hx-post="game/playpause"><span hx-get="game/playpause" hx-swap="outerHTML" hx-trigger="load"></span></button>
+            <button hx-post="game/step" hx-swap="none">Step</button>
+            <button hx-post="game/clear" hx-swap="none">Clear</button>
+        </div>
+        <div id="game" hx-ext="sse" sse-connect="game/sse" sse-swap="all">
+        </div>
+    </body>
+</html>
