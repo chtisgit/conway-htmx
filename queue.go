@@ -19,8 +19,8 @@ type Queue struct {
 
 const bucketName = "steps"
 
-func newQueue() (*Queue, error) {
-	dir, err := os.MkdirTemp("", "queue")
+func newQueue(tmpDir string) (*Queue, error) {
+	dir, err := os.MkdirTemp(tmpDir, "queue")
 	if err != nil {
 		return nil, err
 	}

@@ -39,8 +39,8 @@ func sendFullGameField(w io.Writer, game *Game, templates *template.Template, ro
 	return step, err
 }
 
-func initQueue() *Queue {
-	q, err := newQueue()
+func initQueue(tmpDir string) *Queue {
+	q, err := newQueue(tmpDir)
 	if err != nil {
 		log.Fatalf("error creating queue: %s\n", err.Error())
 	}
@@ -50,13 +50,15 @@ func initQueue() *Queue {
 
 func main() {
 	var listenAddr string
+	var tmpDir string
 	flag.StringVar(&listenAddr, "listen", ":8000", "ip and port to listen on seperated by colon, ip might be empty")
+	flag.StringVar(&tmpDir, "tmpdir", "", "directory for temporary data (default is system tmp directory)")
 	flag.Parse()
 
 	cols, rows := 40, 25
 	mux := http.NewServeMux()
 	game := NewGame(cols, rows)
-	q := initQueue()
+	q := initQueue(tmpDir)
 
 	templates, err := template.New("").Funcs(template.FuncMap{
 		"makeCell": func(x, y int, val byte) Cell {
